@@ -7,9 +7,11 @@
   if (seen || reduced.matches || location.hash) return;
   document.documentElement.classList.add('intro-pending');
   let finished = false;
+  let resizeObserver;
   const finish = () => {
     if (finished) return;
     finished = true;
+    resizeObserver?.disconnect();
     const overlay = document.getElementById('opening-intro');
     const focused = overlay?.contains(document.activeElement);
     document.documentElement.classList.remove('intro-pending','intro-revealing');
@@ -30,6 +32,16 @@
     overlay.innerHTML = '<div class="intro-card" aria-hidden="true"><div class="intro-zone intro-top"><span class="intro-impossible">Impossible</span><span class="intro-admission">Admission</span></div><div class="intro-zone intro-middle"><span>Becomes</span></div><div class="intro-zone intro-bottom"><span class="intro-possible">Possible</span></div></div><button class="intro-skip" type="button">Skip Intro <span aria-hidden="true">+</span></button>';
     [...document.body.children].forEach(el => { if (['SCRIPT','STYLE'].includes(el.tagName) || el.inert) return; el.inert=true; el.setAttribute('data-intro-inert',''); });
     document.body.append(overlay);
+    const card = overlay.querySelector('.intro-card');
+    const fitWords = () => {
+      const width = card.clientWidth * .92;
+      overlay.querySelectorAll('.intro-zone > span').forEach(word => {
+        if (word.offsetWidth) word.style.scale = `${width / word.offsetWidth} 1`;
+      });
+    };
+    fitWords();
+    resizeObserver = new ResizeObserver(fitWords);
+    resizeObserver.observe(card);
     const skip = overlay.querySelector('button');
     skip.addEventListener('click', finish);
     skip.focus({preventScroll:true});

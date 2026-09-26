@@ -1,0 +1,5 @@
+scripts/*-page.html
+scripts/logo-candidates.json
+scripts/download-logos.py
+scripts/find-logos.py
+scripts/optimize-images.py

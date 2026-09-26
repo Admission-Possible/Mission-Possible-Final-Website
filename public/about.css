@@ -1,0 +1,31 @@
+.about-page { padding: 150px 5vw 0; }
+.about-hero { max-width: 1440px; margin: 0 auto; padding: 80px 0 120px; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr); gap: clamp(40px, 8vw, 140px); align-items: end; }
+.about-hero h1 { max-width: 850px; margin: 22px 0 0; font-family: var(--serif); font-size: clamp(64px, 9vw, 150px); font-weight: 400; line-height: .92; letter-spacing: -.07em; }
+.about-hero h1 em { color: var(--plum); }
+.about-lede { max-width: 430px; margin: 0 0 8px; font-size: clamp(20px, 2vw, 30px); line-height: 1.25; }
+.about-image { width: 100%; aspect-ratio: 1.25; object-fit: cover; border-radius: 10px; }
+.about-section { max-width: 1440px; margin: 0 auto; padding: 110px 0; border-top: 1px solid var(--line); }
+.about-section-heading { max-width: 620px; margin-bottom: 58px; }
+.about-section h2 { margin: 16px 0 0; font-size: clamp(44px, 5.5vw, 88px); line-height: 1; letter-spacing: -.06em; }
+.about-copy { max-width: 850px; margin-left: auto; font-size: clamp(20px, 2vw, 30px); line-height: 1.35; }
+.about-copy p + p { margin-top: 26px; }
+.team-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.team-card { min-height: 300px; padding: 28px; border: 1px solid var(--line); border-radius: 10px; background: #fafafa; display: flex; flex-direction: column; justify-content: space-between; }
+.team-card:nth-child(2) { background: var(--pink); }
+.team-card:nth-child(3) { background: #e5def7; }
+.team-card-mark { width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: var(--plum); color: var(--ink); font-family: var(--serif); font-size: 28px; }
+.team-card h3 { margin: 34px 0 8px; font-size: 25px; letter-spacing: -.04em; }
+.team-card p { margin: 0; color: #555; line-height: 1.45; }
+.about-footer { margin-top: 40px; padding: 34px 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 20px; font-size: 13px; color: #666; }
+@media(max-width:720px) {
+  .about-page { padding: 110px 20px 0; }
+  .about-hero { padding: 54px 0 80px; display: block; }
+  .about-hero h1 { font-size: clamp(58px, 17vw, 100px); }
+  .about-lede { margin: 42px 0 28px; font-size: 22px; }
+  .about-section { padding: 78px 0; }
+  .about-copy { margin: 0; font-size: 21px; }
+  .team-grid { grid-template-columns: 1fr; }
+  .team-card { min-height: 230px; }
+  .about-footer { display: block; }
+  .about-footer > * + * { display: block; margin-top: 14px; }
+}

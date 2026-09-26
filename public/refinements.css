@@ -5,12 +5,13 @@
   grid-template-rows: auto clamp(230px, 23vw, 440px) minmax(82px, auto) auto auto;
 }
 .hero-copy { padding: 0 4vw; pointer-events: auto; transform: translateY(6px); }
-.hero-copy > .eyebrow { margin-bottom: 20px; }
+.hero-copy > .eyebrow { margin-bottom: 20px; text-transform: uppercase; }
 .hero h1 { font-size: clamp(58px, 5.9vw, 114px); line-height: 1.05; letter-spacing: -.06em; }
 .hero h1 .becomes { font-size: 1em; }
 .photo-panorama { position: relative; overflow: hidden; min-width: 0; isolation: isolate; transform: translateY(6px); }
 .photo-panel { position: absolute; left: 0; top: 0; object-fit: cover; max-width: none; border-radius: 7px; will-change: transform; }
-.hero-meta { position: static; margin: 0 3vw 20px; font-size: 9px; }
+.hero-meta { position: static; margin: 0 3vw 20px; font-size: 9px; align-items: center; justify-content: center; }
+.hero-meta-copy { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 500; line-height: 1.55; letter-spacing: .1em; text-align: center; }
 .hero .trust-strip { padding: 20px 3vw; gap: 32px; background: var(--paper); border-top: 0; border-bottom: 0; min-width: 0; }
 .trust-strip > p { flex: 0 0 140px; min-width: 0; font-size: 12px; line-height: 1.5; }
 .logo-window { min-width: 0; mask-image: linear-gradient(to right,transparent,#000 12px,#000 calc(100% - 12px),transparent); }
@@ -59,6 +60,26 @@
 .join-scene-copy { position: relative; padding-top: 82px; }
 .join-scene-copy > p { margin-bottom: 18px; }
 .join-scene h2 { font-size: clamp(100px,13vw,225px); line-height: .95; }
+.join-scene h2 a,
+.join-scene .circle-link { transition: color .25s ease, background-color .25s ease; }
+.join-scene h2 a:hover,
+.join-scene h2 a:focus-visible { color: var(--plum); }
+.join-scene .circle-link:hover,
+.join-scene .circle-link:focus-visible { background-color: var(--plum); color: var(--ink); }
+.join-scene-copy:has(h2 a:hover, .circle-link:hover) h2 a,
+.join-scene-copy:has(h2 a:focus-visible, .circle-link:focus-visible) h2 a {
+  color: var(--plum);
+  background-color: transparent;
+  text-shadow: none;
+  box-shadow: none;
+}
+.join-scene-copy:has(h2 a:hover, .circle-link:hover) .circle-link,
+.join-scene-copy:has(h2 a:focus-visible, .circle-link:focus-visible) .circle-link { color: var(--ink); }
+.join-scene-copy:has(h2 a:hover, .circle-link:hover) .circle-link,
+.join-scene-copy:has(h2 a:focus-visible, .circle-link:focus-visible) .circle-link {
+  background-color: var(--plum);
+  color: var(--ink);
+}
 .join-scene .circle-link { margin: 22px auto; }
 .circle-link span { display: block; line-height: 1; font-size: 28px; font-weight: 300; }
 .photo-arc { position: absolute; inset: 390px 0 0; overflow: hidden; isolation: isolate; }
@@ -66,7 +87,7 @@
 
 footer:not(.simple-footer) { padding-top: 26px; }
 .footer-panel { margin-top: 0; }
-.giant-brand { min-height: 0; padding: 80px 2vw 60px; font-size: clamp(45px,12vw,205px); }
+.giant-brand { min-height: 0; padding: 50px 2vw 20px; font-size: clamp(45px,12vw,205px); }
 .giant-brand img { filter: none; }
 .giant-brand span { background: linear-gradient(110deg,var(--plum),var(--lavender),var(--blue),var(--cyan)); background-clip: text; color: transparent; }
 .motion-paused .photo-panel { will-change: auto; }
@@ -116,7 +137,7 @@ footer:not(.simple-footer) { padding-top: 26px; }
   .join-scene-copy { padding-top: 85px; }
   .join-scene h2 { font-size: 110px; }
   .photo-arc { top: 355px; }
-  .giant-brand { font-size: 12vw; padding: 60px 0 45px; gap: 8px; }
+  .giant-brand { font-size: 12vw; padding: 35px 0 12px; gap: 8px; }
   .giant-brand img { width: 25%; }
 }
 @media(prefers-reduced-motion:reduce) {
@@ -146,7 +167,7 @@ footer:not(.simple-footer) { padding-top: 26px; }
 .pathway-center > a { padding-top: 18px; }
 .source-note { margin-top: 8px; }
 footer:not(.simple-footer) { padding-top: 0; }
-.giant-brand { min-height: 550px; padding: 65px 0 120px; }
+.giant-brand { min-height: 360px; padding: 30px 0 45px; }
 .giant-brand img { width: 28%; mix-blend-mode: multiply; filter: none; }
 .giant-brand { filter: grayscale(1); transition: filter 400ms ease; }
 .giant-brand:hover,.giant-brand:focus-visible { filter: grayscale(0); }
@@ -162,6 +183,6 @@ footer:not(.simple-footer) { padding-top: 0; }
   .pathway-logo { height: 32px; margin-top: 9px; }
   .pathway-center .who { margin-top: 12px; padding-top: 12px; }
   .pathway-center > a { padding-top: 14px; }
-  .giant-brand { min-height: 300px; padding: 55px 0 100px; }
+  .giant-brand { min-height: 190px; padding: 15px 0 20px; }
   .footer-panel { margin-top: 0; }
 }

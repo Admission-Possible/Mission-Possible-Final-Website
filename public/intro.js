@@ -34,7 +34,7 @@
     document.body.append(overlay);
     const card = overlay.querySelector('.intro-card');
     const fitWords = () => {
-      const width = card.clientWidth * .84;
+      const width = card.clientWidth * .72;
       overlay.querySelectorAll('.intro-zone > span').forEach(word => {
         if (word.offsetWidth) word.style.scale = `${width / word.offsetWidth} 1`;
       });

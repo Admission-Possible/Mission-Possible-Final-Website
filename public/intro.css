@@ -2,10 +2,10 @@
 .intro-pending:not(.intro-revealing) body > :not(#opening-intro) { visibility:hidden; }
 #opening-intro { position:fixed; inset:0; z-index:10000; background:#f7f7f5; display:grid; place-items:center; animation:intro-exit 1s cubic-bezier(.76,0,.24,1) 4.1s forwards; }
 .intro-card { position:relative; width:min(640px,calc(100vw - 48px),112svh); aspect-ratio:1.6; container-type:inline-size; background:#111; color:white; overflow:hidden; }
-.intro-zone { position:absolute; left:0; width:100%; height:33.333%; display:grid; place-items:center; font-family:Arial,Helvetica,sans-serif; font-size:16.5cqw; font-weight:500; letter-spacing:-.06em; line-height:1.05; }
-.intro-top { top:0; animation:intro-converge-top .75s cubic-bezier(.76,0,.24,1) 2.6s both; }
-.intro-middle { top:33.333%; animation:intro-middle-out .75s cubic-bezier(.76,0,.24,1) 2.6s both; }
-.intro-bottom { top:66.666%; animation:intro-converge-bottom .75s cubic-bezier(.76,0,.24,1) 2.6s both; }
+.intro-zone { position:absolute; left:0; width:100%; height:28%; display:grid; place-items:center; font-family:Arial,Helvetica,sans-serif; font-size:14cqw; font-weight:500; letter-spacing:-.06em; line-height:1.05; }
+.intro-top { top:8%; animation:intro-converge-top .75s cubic-bezier(.76,0,.24,1) 2.6s both; }
+.intro-middle { top:36%; animation:intro-middle-out .75s cubic-bezier(.76,0,.24,1) 2.6s both; }
+.intro-bottom { top:64%; animation:intro-converge-bottom .75s cubic-bezier(.76,0,.24,1) 2.6s both; }
 .intro-zone > span { grid-area:1/1; white-space:nowrap; transform-origin:center; }
 .intro-impossible,.intro-middle > span,.intro-possible { animation:intro-word-in .9s cubic-bezier(.2,.7,.2,1) .4s both; }
 .intro-impossible { animation:intro-word-in .9s cubic-bezier(.2,.7,.2,1) .4s both,intro-word-out .75s cubic-bezier(.76,0,.24,1) 2.6s forwards; }
@@ -18,8 +18,8 @@
 @keyframes intro-word-in { from { opacity:0; transform:translateY(45px); clip-path:inset(100% 0 0); } to { opacity:1; transform:translateY(0); clip-path:inset(0); } }
 @keyframes intro-word-out { to { opacity:0; transform:translateY(-65px); } }
 @keyframes intro-middle-out { to { opacity:0; transform:translateY(-25px); } }
-@keyframes intro-converge-top { to { transform:translateY(58%); } }
-@keyframes intro-converge-bottom { to { transform:translateY(-58%); } }
+@keyframes intro-converge-top { to { transform:translateY(50%); } }
+@keyframes intro-converge-bottom { to { transform:translateY(-50%); } }
 @keyframes intro-purple { to { color:#b388eb; } }
 @keyframes intro-underline { to { transform:scaleX(1); } }
 @keyframes intro-exit { to { opacity:0; visibility:hidden; } }

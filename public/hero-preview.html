@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hero transition preview — (Ad)mission Possible</title>
+  <link rel="stylesheet" href="hero-preview.css">
+</head>
+<body>
+  <header class="preview-nav">
+    <a class="preview-brand" href="./">
+      <span class="preview-mark"><img src="assets/brand-transparent.png" alt=""></span>
+      <span>(Ad)mission Possible</span>
+    </a>
+    <span class="preview-label">INTERACTION PREVIEW</span>
+  </header>
+
+  <main class="preview-page">
+    <section class="preview-hero" aria-labelledby="preview-title">
+      <div class="preview-title-shell">
+        <p class="preview-eyebrow">BIG DREAMS. ENDLESS POSSIBILITIES.</p>
+        <h1 id="preview-title">Impossible<br><em>Becomes Possible</em></h1>
+      </div>
+      <p class="preview-hint">Scroll to watch the intro return to the logo.</p>
+    </section>
+    <section class="preview-after">
+      <p class="preview-eyebrow">THE TRANSITION ENDS HERE.</p>
+      <h2>The logo stays with you as you continue.</h2>
+    </section>
+  </main>
+
+  <script>
+    const hero = document.querySelector('.preview-hero');
+    const shell = document.querySelector('.preview-title-shell');
+    const brand = document.querySelector('.preview-brand');
+    let origin;
+    const measure = () => {
+      shell.style.transform = 'translate(-50%, -50%) scale(1)';
+      const from = shell.getBoundingClientRect();
+      const to = brand.getBoundingClientRect();
+      origin = {left: from.left, top: from.top, brandLeft: to.left, brandTop: to.top};
+    };
+    const update = () => {
+      if (!origin) measure();
+      const range = Math.max(1, hero.offsetHeight - innerHeight);
+      const progress = Math.max(0, Math.min(1, scrollY / range));
+      const x = origin.left + (origin.brandLeft - origin.left) * progress;
+      const y = origin.top + (origin.brandTop - origin.top) * progress;
+      const scale = 1 - progress * .88;
+      shell.style.left = `${x}px`;
+      shell.style.top = `${y}px`;
+      shell.style.transform = `translate(0, 0) scale(${scale})`;
+      shell.style.opacity = 1 - progress * .08;
+    };
+    addEventListener('scroll', update, {passive: true});
+    addEventListener('resize', () => { origin = null; update(); });
+    measure();
+    update();
+  </script>
+</body>
+</html>

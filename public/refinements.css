@@ -4,7 +4,7 @@
   padding: 136px 0 0; display: grid; place-items: initial; background-color: var(--paper);
   grid-template-rows: auto clamp(230px, 23vw, 440px) minmax(82px, auto) auto auto;
 }
-.hero-copy { padding: 0 4vw; pointer-events: auto; transform: translateY(6px); }
+.hero-copy { --hero-morph: 0; --hero-morph-x: 0px; --hero-morph-y: 0px; padding: 0 4vw; pointer-events: auto; transform: translate(calc(var(--hero-morph) * var(--hero-morph-x)),calc(6px + (var(--hero-morph) * (var(--hero-morph-y) - 6px)))) scale(calc(1 - (var(--hero-morph) * .72))); transform-origin: top left; opacity: calc(1 - (var(--hero-morph) * .35)); will-change: transform,opacity; transition: transform .08s linear,opacity .08s linear; }
 .hero-copy > .eyebrow { margin-bottom: 20px; text-transform: uppercase; }
 .hero h1 { font-size: clamp(58px, 5.9vw, 114px); line-height: 1.05; letter-spacing: -.06em; }
 .hero h1 .becomes { font-size: 1em; }

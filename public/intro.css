@@ -2,7 +2,7 @@
 .intro-pending:not(.intro-revealing) body > :not(#opening-intro) { visibility:hidden; }
 #opening-intro { position:fixed; inset:0; z-index:10000; background:#f7f7f5; display:grid; place-items:center; animation:intro-exit 1s cubic-bezier(.76,0,.24,1) 4.1s forwards; }
 .intro-card { position:relative; width:min(640px,calc(100vw - 48px),112svh); aspect-ratio:1.6; container-type:inline-size; background:#111; color:white; overflow:hidden; }
-.intro-zone { position:absolute; left:0; width:100%; height:33.333%; display:grid; place-items:center; font-family:Arial,Helvetica,sans-serif; font-size:18cqw; font-weight:500; letter-spacing:-.06em; line-height:1.05; }
+.intro-zone { position:absolute; left:0; width:100%; height:33.333%; display:grid; place-items:center; font-family:Arial,Helvetica,sans-serif; font-size:16.5cqw; font-weight:500; letter-spacing:-.06em; line-height:1.05; }
 .intro-top { top:0; animation:intro-converge-top .75s cubic-bezier(.76,0,.24,1) 2.6s both; }
 .intro-middle { top:33.333%; animation:intro-middle-out .75s cubic-bezier(.76,0,.24,1) 2.6s both; }
 .intro-bottom { top:66.666%; animation:intro-converge-bottom .75s cubic-bezier(.76,0,.24,1) 2.6s both; }

@@ -17,7 +17,7 @@ export function initializePhotoScenes(images, reduced, isPaused) {
   function size(scene) {
     const {width: w, height: h, final} = scene;
     const width = final ? Math.min(220, Math.max(112, w * .115)) : Math.min(260, Math.max(112, w * .16));
-    const height = width;
+    const height = final ? width : Math.min(h * .92, w * .205);
     scene.nodes.forEach(({img}) => {img.style.width = `${width}px`; img.style.height = `${height}px`;});
   }
   const observer = new IntersectionObserver(entries => entries.forEach(entry => {
@@ -44,20 +44,17 @@ export function initializePhotoScenes(images, reduced, isPaused) {
           scale = .88 + Math.min(1, Math.abs(n)) * .18;
           rotate = Math.sin(n * Math.PI) * 9;
         } else {
-          // A continuous center-outward conveyor: every panel enters at center,
-          // travels to an outer edge, then wraps as the next panel arrives.
-          const phase = (i / nodes.length + time / 8.5) % 1;
-          const direction = i % 2 ? -1 : 1;
-          const travel = w * .68 + 90;
-          const progress = Math.min(1, phase / .82);
+          // Enter from the center once, then retain the complete layered panorama.
+          const n = (i - (nodes.length - 1) / 2) / ((nodes.length - 1) / 2);
+          const distance = Math.abs(n);
+          const progress = reduced.matches || isPaused() ? 1 : Math.max(0, Math.min(1, (time - scene.started - distance * .18) / .9));
           const ease = 1 - Math.pow(1 - progress, 3);
-          x = w / 2 + direction * ease * travel;
-          y = h * .5 + Math.sin(phase * Math.PI + i * .7) * h * .12;
-          scale = .42 + ease * .52;
-          rotate = direction * (-4 + phase * 10) + (reduced.matches ? 0 : Math.sin(time * .3 + i) * 1.5);
-          perspective = direction * -10;
-          opacity = phase < .12 ? phase / .12 : phase > .84 ? (1 - phase) / .16 : 1;
-          if (isPaused() || reduced.matches) opacity = Math.max(opacity, .8);
+          x = w / 2 + Math.sign(n) * Math.pow(distance, 1.3) * w * .48 * ease;
+          y = h * .5 + (reduced.matches ? 0 : Math.sin(time * .35 + i * .45) * 2);
+          scale = (.46 + distance * .54) * (.8 + ease * .2);
+          rotate = n * -2;
+          perspective = n * -10;
+          opacity = ease;
         }
         img.style.transform = `translate3d(${x}px,${y}px,0) translate(-50%,-50%) perspective(1000px) rotateY(${perspective}deg) rotate(${rotate}deg) scale(${scale})`;
         img.style.opacity = opacity;

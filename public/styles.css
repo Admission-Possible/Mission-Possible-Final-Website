@@ -10,3 +10,7 @@
 @media(max-width:720px){.pathway-center{left:7%;margin-left:0;width:85%}.fact-one{top:auto;right:0;left:auto;bottom:-8%}.fact-two{top:auto;right:auto;left:0;bottom:-8%}.fact-three{display:none}.pathway-controls button{min-height:49px}.pathway-controls button img{width:88px;height:26px}.pathway-tab-wordmark{font-size:11px}}
 @media(max-width:720px){.pathway-sticky{min-height:960px}.pathway-stage{inset:270px 6vw 210px}}
 @media(min-width:721px){.offer{align-items:center}.offer-body{padding-top:0}}
+
+/* Supplied transparent navigation mark; preserve the existing nav dimensions. */
+.nav .brand-symbol{background:transparent;border-radius:0;overflow:hidden;position:relative}
+.nav .brand-symbol img{width:50px;height:50px;object-fit:contain;transform:translate(-8px,-10px)}

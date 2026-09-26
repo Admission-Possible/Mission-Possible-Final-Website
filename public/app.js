@@ -3,6 +3,32 @@ import {pathways} from './pathways.js';
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 let paused = false;
 const nav = document.querySelector('.nav');
+const heroCopy = document.querySelector('.hero-copy');
+const hero = document.querySelector('.hero');
+if (heroCopy && hero) {
+  let heroMorphFrame = 0;
+  const setHeroMorphGeometry = () => {
+    const brand = document.querySelector('.nav .brand');
+    if (!brand) return;
+    const copy = heroCopy.getBoundingClientRect();
+    const brandRect = brand.getBoundingClientRect();
+    heroCopy.style.setProperty('--hero-morph-x', `${brandRect.left - copy.left}px`);
+    heroCopy.style.setProperty('--hero-morph-y', `${brandRect.top - copy.top + innerHeight * .72}px`);
+  };
+  const updateHeroMorph = () => {
+    heroMorphFrame = 0;
+    const progress = reduced.matches ? 0 : Math.max(0, Math.min(1, scrollY / Math.max(1, innerHeight * .72)));
+    heroCopy.style.setProperty('--hero-morph', progress.toFixed(3));
+    heroCopy.classList.toggle('is-morphing', progress > 0);
+  };
+  const scheduleHeroMorph = () => {
+    if (!heroMorphFrame) heroMorphFrame = requestAnimationFrame(updateHeroMorph);
+  };
+  addEventListener('scroll', scheduleHeroMorph, {passive: true});
+  addEventListener('resize', () => {setHeroMorphGeometry();scheduleHeroMorph()});
+  setHeroMorphGeometry();
+  updateHeroMorph();
+}
 const closeMenus = () => document.querySelectorAll('.dropdown').forEach(d => {d.classList.remove('open');d.querySelector('button').setAttribute('aria-expanded','false')});
 document.querySelectorAll('.dropdown>button').forEach(b => b.addEventListener('click',()=>{const was=b.parentElement.classList.contains('open');closeMenus();b.parentElement.classList.toggle('open',!was);b.setAttribute('aria-expanded',String(!was))}));
 document.querySelector('.menu-toggle')?.addEventListener('click',e=>{const open=nav.classList.toggle('menu-open');e.currentTarget.setAttribute('aria-expanded',String(open))});

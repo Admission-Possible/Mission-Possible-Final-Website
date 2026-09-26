@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
-    "check": "node --check public/app.js && node --check public/pathways.js && node --check public/join.js && node --check public/photo-scenes.js"
+    "check": "node --check public/app.js && node --check public/pathways.js && node --check public/join.js && node --check public/photo-scenes.js && node --check public/intro.js && node --check public/guides.js && node --check scripts/pages.mjs && node scripts/check-pages.mjs && node scripts/check-intro.mjs",
+    "build": "node scripts/pages.mjs"
   }
 }

@@ -1,18 +1,17 @@
 /* Page refinements: existing palette, fonts, and unaffected sections stay in styles.css. */
 .hero {
-  height: auto; min-height: 0; max-height: none;
-  padding: 136px 0 0; display: grid; place-items: initial;
-  grid-template-rows: auto clamp(230px, 23vw, 440px) auto auto auto;
+  height: auto; min-height: 100svh; max-height: none;
+  padding: 136px 0 0; display: grid; place-items: initial; background-color: var(--paper);
+  grid-template-rows: auto clamp(230px, 23vw, 440px) minmax(82px, auto) auto auto;
 }
-.hero-copy { padding: 0 4vw; pointer-events: auto; }
+.hero-copy { padding: 0 4vw; pointer-events: auto; transform: translateY(6px); }
 .hero-copy > .eyebrow { margin-bottom: 20px; }
 .hero h1 { font-size: clamp(58px, 5.9vw, 114px); line-height: 1.05; letter-spacing: -.06em; }
 .hero h1 .becomes { font-size: 1em; }
-.photo-panorama { position: relative; overflow: hidden; min-width: 0; isolation: isolate; }
+.photo-panorama { position: relative; overflow: hidden; min-width: 0; isolation: isolate; transform: translateY(6px); }
 .photo-panel { position: absolute; left: 0; top: 0; object-fit: cover; max-width: none; border-radius: 7px; will-change: transform; }
-.hero .manifesto-small { position: relative; z-index: 1; margin: 12px 20px 22px; text-align: center; font-family: Arial, Helvetica, sans-serif; font-size: clamp(17px, 1.4vw, 22px); line-height: 1.5; }
 .hero-meta { position: static; margin: 0 3vw 20px; font-size: 9px; }
-.hero .trust-strip { padding: 20px 3vw; gap: 32px; background: transparent; border-top: 0; min-width: 0; }
+.hero .trust-strip { padding: 20px 3vw; gap: 32px; background: var(--paper); border-top: 0; border-bottom: 0; min-width: 0; }
 .trust-strip > p { flex: 0 0 140px; min-width: 0; font-size: 12px; line-height: 1.5; }
 .logo-window { min-width: 0; mask-image: linear-gradient(to right,transparent,#000 12px,#000 calc(100% - 12px),transparent); }
 .logo-track { animation-duration: 20s; }
@@ -73,7 +72,7 @@ footer:not(.simple-footer) { padding-top: 26px; }
 .motion-paused .photo-panel { will-change: auto; }
 
 @media(max-width:1099px) {
-  .hero { min-height: 0; padding-top: 130px; }
+  .hero { min-height: 0; padding-top: 130px; grid-template-rows: auto clamp(230px, 23vw, 440px) minmax(82px, auto) auto auto; }
   .hero h1 { max-width: 800px; margin: auto; font-size: clamp(50px,7vw,74px); }
   .hero h1 em { white-space: nowrap; }
   .pathway-stage { grid-template-columns: 1fr 1fr 1fr; gap: 25px; max-width: 760px; }
@@ -85,12 +84,11 @@ footer:not(.simple-footer) { padding-top: 26px; }
   .photo-arc { top: 355px; }
 }
 @media(max-width:720px) {
-  .hero { min-height: 0; height: auto; padding-top: 108px; grid-template-rows: auto 180px auto auto auto; }
+  .hero { min-height: 0; height: auto; padding-top: 108px; grid-template-rows: auto 220px minmax(116px, auto) auto auto; }
   .hero-copy { padding: 0 18px; }
   .hero-copy > .eyebrow { margin-bottom: 18px; font-size: 9px; }
   .hero h1 { font-size: clamp(41px,11.7vw,76px); line-height: 1.03; }
   .hero h1 .becomes { display: inline; font-size: .83em; margin: 0; }
-  .hero .manifesto-small { font-size: 15px; line-height: 1.5; margin: 16px 18px 22px; }
   .hero-meta { margin: 0 20px 18px; font-size: 7px; gap: 20px; }
   .hero .trust-strip { padding: 16px 20px; gap: 18px; }
   .trust-strip > p { flex-basis: 92px; font-size: 10px; }

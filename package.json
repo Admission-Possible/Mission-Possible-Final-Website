@@ -1,0 +1,11 @@
+{
+  "name": "admission-possible",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/serve.mjs",
+    "start": "node scripts/serve.mjs",
+    "check": "node --check public/app.js && node --check public/pathways.js && node --check public/join.js && node --check public/photo-scenes.js"
+  }
+}

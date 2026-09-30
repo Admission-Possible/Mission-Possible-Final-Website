@@ -1,129 +1,122 @@
-// Same-origin Join endpoint (Vercel Function, Node.js runtime).
-//
-// Why this exists: the deployed site had no backend, so Join fell back to a
-// `mailto:` link. That silently lost submissions for students on school-managed
-// Chromebooks with no configured mail client, and pointed at a domain the
-// project does not own. This endpoint is same-origin, so the existing
-// `connect-src 'self'` CSP in vercel.json covers it unchanged.
-//
-// Signature: the `fetch` Web Standard export, which is what Vercel's Node.js
-// runtime expects for files in /api on a non-framework project.
-// See https://vercel.com/docs/functions/runtimes/node-js
-//
-// Configuration (Vercel project env vars):
-//   RESEND_API_KEY    — required to actually deliver mail.
-//   JOIN_NOTIFY_EMAIL — required; the inbox that receives submissions.
-//   JOIN_FROM_EMAIL   — optional; must be on a Resend-verified domain.
-//
-// With the mail vars unset the endpoint returns 503 so the client shows its
-// copy-and-paste fallback instead of pretending the submission was delivered.
+import { formatIntake, normalizeIntake, validateIntake, type IntakeAnswers } from '../src/data/mentorship.ts';
 
-/** Field caps: generous for humans, bounded enough to blunt abusive payloads. */
-const LIMITS = { first: 100, last: 100, email: 254, grade: 60, firstGen: 20, interest: 80, needs: 4000 } as const;
-/** The form offers six interest boxes; anything beyond a few more is abuse. */
-const MAX_INTERESTS = 12;
-
-type JoinPayload = {
-  first: string;
-  last: string;
-  email: string;
-  grade: string;
-  firstGen: string;
-  interests: string[];
-  needs: string;
-};
-
-const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-const json = (body: unknown, status: number) =>
+// Web Request / Response signature works on Vercel and the local Vite adapter.
+// All three variables are required: RESEND_API_KEY, JOIN_NOTIFY_EMAIL,
+// JOIN_FROM_EMAIL (a sender on a Resend-verified domain). Never log intake data.
+const MAX_BODY_BYTES = 32_768;
+const json = (body: unknown, status: number, extraHeaders: Record<string, string> = {}) =>
   new Response(JSON.stringify(body), {
     status,
-    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store', ...extraHeaders },
   });
 
-/** Coerce one unknown field to a trimmed, length-capped string. */
-function field(value: unknown, max: number): string {
-  return typeof value === 'string' ? value.trim().slice(0, max) : '';
+async function readBoundedBody(request: Request): Promise<string | null> {
+  if (!request.body) return '';
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder();
+  let size = 0;
+  let text = '';
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > MAX_BODY_BYTES) {
+        await reader.cancel();
+        return null;
+      }
+      text += decoder.decode(value, { stream: true });
+    }
+    return text + decoder.decode();
+  } finally {
+    reader.releaseLock();
+  }
 }
 
-/** Keep header injection out of the reply-to and subject lines. */
-const singleLine = (value: string) => value.replace(/[\r\n]+/g, ' ').trim();
-
 export async function handleJoin(request: Request): Promise<Response> {
-  if (request.method !== 'POST') return json({ error: 'Method not allowed.' }, 405);
-
+  if (request.method !== 'POST') return json({ error: 'Method not allowed.' }, 405, { Allow: 'POST' });
+  const origin = request.headers.get('origin');
+  if (origin) {
+    try {
+      if (new URL(origin).origin !== new URL(request.url).origin)
+        return json({ error: 'Please submit the form from this website.' }, 403);
+    } catch {
+      return json({ error: 'Please submit the form from this website.' }, 403);
+    }
+  }
+  if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') || ''))
+    return json({ error: 'Expected a JSON request.' }, 415);
+  const contentLength = Number(request.headers.get('content-length'));
+  if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES)
+    return json({ error: 'Your answers are too long. Please shorten them and try again.' }, 413);
   let raw: unknown;
   try {
-    raw = await request.json();
+    const text = await readBoundedBody(request);
+    if (text === null) return json({ error: 'Your answers are too long. Please shorten them and try again.' }, 413);
+    raw = JSON.parse(text);
   } catch {
-    return json({ error: 'Expected a JSON body.' }, 400);
+    return json({ error: 'Expected a valid JSON object.' }, 400);
   }
-  if (typeof raw !== 'object' || raw === null) {
-    return json({ error: 'Expected a JSON object.' }, 400);
-  }
-
-  const body = raw as Record<string, unknown>;
-  const payload: JoinPayload = {
-    first: field(body.first, LIMITS.first),
-    last: field(body.last, LIMITS.last),
-    email: field(body.email, LIMITS.email),
-    grade: field(body.grade, LIMITS.grade),
-    firstGen: field(body.firstGen, LIMITS.firstGen),
-    interests: Array.isArray(body.interests)
-      ? body.interests
-          .slice(0, MAX_INTERESTS)
-          .map((v) => singleLine(field(v, LIMITS.interest)))
-          .filter(Boolean)
-      : [],
-    needs: field(body.needs, LIMITS.needs),
-  };
-
-  // Mirror the client-side rules so a direct POST cannot bypass them.
-  if (!payload.first) return json({ error: 'A first name is required.' }, 400);
-  if (!isValidEmail(payload.email)) return json({ error: 'A valid email address is required.' }, 400);
-
+  const errors = validateIntake(raw);
+  if (Object.keys(errors).length)
+    return json({ error: 'Please check your answers and try again.', fields: errors }, 400);
+  const answers = normalizeIntake(raw as IntakeAnswers);
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.JOIN_NOTIFY_EMAIL;
-  // 503, not 500: the request was fine, the server just isn't wired up yet. The
-  // client reads this as "show the copyable fallback", not "you did this wrong".
-  if (!apiKey || !to) return json({ error: 'Submissions are not configured yet.' }, 503);
+  const from = process.env.JOIN_FROM_EMAIL;
+  if (!apiKey || !to || !from)
+    return json(
+      {
+        error:
+          'Mentorship requests are not open for online delivery yet. Your answers have not been sent. You can download a copy below and try again later.',
+      },
+      503,
+    );
 
-  const name = singleLine(`${payload.first} ${payload.last}`.trim());
-  const text = [
-    `First name: ${payload.first}`,
-    `Last name: ${payload.last}`,
-    `Email: ${payload.email}`,
-    `Grade level: ${payload.grade}`,
-    `First in family to go to college: ${payload.firstGen}`,
-    `Looking for help with: ${payload.interests.join(', ') || '(not provided)'}`,
-    '',
-    'Anything else:',
-    payload.needs || '(not provided)',
-  ].join('\n');
-
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10_000);
   try {
-    const res = await fetch('https://api.resend.com/emails', {
+    const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
+      signal: controller.signal,
       headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: process.env.JOIN_FROM_EMAIL || 'onboarding@resend.dev',
+        from,
         to: [to],
-        reply_to: singleLine(payload.email),
-        subject: `Join request — ${name}`,
-        text,
+        reply_to: answers.email,
+        subject: `Mentorship request — ${answers.fullName}`,
+        text: formatIntake(answers),
       }),
     });
-    if (!res.ok) {
-      // Never echo the upstream body to the browser: it can carry key hints.
-      console.error('[join] delivery failed', res.status, await res.text().catch(() => ''));
-      return json({ error: 'We could not deliver that just now.' }, 502);
-    }
-  } catch (err) {
-    console.error('[join] delivery threw', err);
-    return json({ error: 'We could not deliver that just now.' }, 502);
+    if (!response.ok)
+      return json(
+        {
+          error:
+            'We could not send your request just now. Your answers are still here. Please try again or download a copy.',
+        },
+        502,
+      );
+    const receipt: unknown = await response.json();
+    if (!receipt || typeof receipt !== 'object' || !('id' in receipt) || typeof receipt.id !== 'string' || !receipt.id)
+      return json(
+        {
+          error:
+            'We could not confirm delivery. Your answers are still here. Please download a copy and try again later.',
+        },
+        502,
+      );
+    return json({ ok: true }, 200);
+  } catch {
+    return json(
+      {
+        error:
+          'We could not confirm delivery just now. Your answers are still here. You can download a copy and try again later.',
+      },
+      502,
+    );
+  } finally {
+    clearTimeout(timeout);
   }
-
-  return json({ ok: true }, 200);
 }
 
 export default { fetch: handleJoin };

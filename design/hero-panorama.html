@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admission Possible — Panorama study</title>
+    <style>
+      @font-face {
+        font-family: Beausite;
+        src: url('/fonts/beausite-regular.woff2') format('woff2');
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Beausite;
+        src: url('/fonts/beausite-medium.woff2') format('woff2');
+        font-weight: 500;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Mono;
+        src: url('/fonts/geist-mono-latin.woff2') format('woff2');
+        font-weight: 400;
+        font-display: swap;
+      }
+      :root {
+        --paper: #fafaf7;
+        --ink: #171719;
+        --muted: #6a696c;
+        --line: #d9d8d2;
+        --purple: #7552a4;
+        --lavender: #b388eb;
+        --gutter: 48px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: Beausite, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      a:focus-visible {
+        outline: 2px solid var(--purple);
+        outline-offset: 6px;
+      }
+      .header {
+        height: 86px;
+        margin: 0 var(--gutter);
+        display: flex;
+        align-items: center;
+        gap: 80px;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand {
+        flex: 0 0 200px;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 15px;
+        line-height: 1.05;
+        font-weight: 500;
+        letter-spacing: -0.035em;
+      }
+      .brand img {
+        width: 40px;
+        height: 34px;
+        object-fit: contain;
+      }
+      .brand span span {
+        display: block;
+      }
+      nav {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+        align-items: center;
+        gap: 18px;
+      }
+      nav a {
+        display: block;
+        padding: 12px 0;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      nav a span {
+        font-family: Mono, monospace;
+        font-size: 10px;
+        color: var(--muted);
+        margin-right: 5px;
+      }
+      nav a[aria-current] {
+        text-decoration: underline;
+        text-underline-offset: 6px;
+      }
+      nav a:hover {
+        color: var(--purple);
+      }
+      main {
+        padding: 43px var(--gutter) 0;
+      }
+      .eyebrow {
+        margin: 0 0 22px;
+        font-family: Mono, monospace;
+        font-size: 10px;
+        line-height: 1.4;
+        letter-spacing: 0.075em;
+        text-transform: uppercase;
+      }
+      .headline {
+        position: relative;
+        margin-bottom: 35px;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(76px, 8.4vw, 140px);
+        font-weight: 400;
+        line-height: 0.97;
+        letter-spacing: -0.064em;
+      }
+      h1 span {
+        display: block;
+        color: var(--purple);
+      }
+      .introduction {
+        position: absolute;
+        right: 0;
+        bottom: 4px;
+        width: 340px;
+      }
+      .introduction p {
+        margin: 0 0 20px;
+        max-width: 33ch;
+        font-size: 17px;
+        line-height: 1.4;
+        letter-spacing: -0.018em;
+      }
+      .cta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 35px;
+        padding-bottom: 10px;
+        width: 213px;
+        font-size: 14px;
+        border-bottom: 1px solid var(--ink);
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .cta span {
+        font-size: 24px;
+        line-height: 16px;
+        transition: transform 0.2s;
+      }
+      .cta:hover {
+        color: var(--purple);
+        border-color: var(--purple);
+      }
+      .cta:hover span {
+        transform: translate(2px, -2px);
+      }
+      .panorama {
+        margin: 0;
+      }
+      .image-frame {
+        width: 100%;
+        height: clamp(300px, 29.6vw, 445px);
+        overflow: hidden;
+        background: #d4d4be;
+      }
+      .image-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 56%;
+        display: block;
+      }
+      figcaption {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px 0 0;
+        font-family: Mono, monospace;
+        color: var(--muted);
+        font-size: 9px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      figcaption .index {
+        color: var(--ink);
+      }
+      .universities {
+        margin-top: 26px;
+        padding: 24px 0 29px;
+        border-top: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: 155px repeat(5, 1fr);
+        align-items: center;
+        gap: 38px;
+      }
+      .universities p {
+        margin: 0;
+        font-size: 11px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .universities img {
+        width: 100%;
+        max-width: 160px;
+        height: 42px;
+        object-fit: contain;
+        mix-blend-mode: multiply;
+        filter: grayscale(1);
+        opacity: 0.78;
+      }
+      .universities img[alt='UC Davis'],
+      .universities img[alt='UC Berkeley'] {
+        filter: brightness(0);
+      }
+      .universities img[alt='Brown University'] {
+        max-width: 145px;
+      }
+      .universities img[alt='University of Pennsylvania'] {
+        height: 38px;
+      }
+      .study-label {
+        position: fixed;
+        right: 12px;
+        bottom: 10px;
+        z-index: 10;
+        padding: 6px 8px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        color: var(--muted);
+        font-family: Mono, monospace;
+        font-size: 9px;
+        pointer-events: none;
+      }
+      @media (min-width: 1650px) {
+        .header,
+        main {
+          max-width: 1600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .header {
+          margin-left: max(var(--gutter), calc((100vw - 1504px) / 2));
+          margin-right: max(var(--gutter), calc((100vw - 1504px) / 2));
+        }
+      }
+      @media (max-width: 1100px) {
+        :root {
+          --gutter: 30px;
+        }
+        .header {
+          gap: 36px;
+        }
+        .brand {
+          flex-basis: 165px;
+        }
+        .introduction {
+          width: 290px;
+        }
+        .introduction p {
+          font-size: 15px;
+        }
+        .universities {
+          grid-template-columns: 120px repeat(5, 1fr);
+          gap: 25px;
+        }
+        .universities img {
+          height: 33px;
+        }
+      }
+      @media (max-width: 760px) {
+        :root {
+          --gutter: 22px;
+        }
+        .header {
+          height: auto;
+          min-height: 120px;
+          padding: 19px 0 0;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 9px;
+        }
+        .brand {
+          flex: none;
+          font-size: 14px;
+          gap: 8px;
+        }
+        .brand img {
+          width: 33px;
+          height: 30px;
+        }
+        .brand span span {
+          display: inline;
+        }
+        nav {
+          width: 100%;
+          gap: 8px;
+          padding: 3px 0 9px;
+        }
+        nav a {
+          font-size: 10px;
+          padding: 9px 0;
+        }
+        nav a span {
+          display: none;
+        }
+        main {
+          padding-top: 33px;
+        }
+        .eyebrow {
+          font-size: 8px;
+          margin-bottom: 23px;
+        }
+        h1 {
+          font-size: clamp(49px, 10.3vw, 77px);
+          line-height: 1.02;
+          letter-spacing: -0.06em;
+          max-width: 11ch;
+        }
+        .headline {
+          margin-bottom: 29px;
+        }
+        .introduction {
+          position: static;
+          width: 100%;
+          margin-top: 24px;
+        }
+        .introduction p {
+          font-size: 15px;
+          max-width: 31ch;
+          margin-bottom: 20px;
+        }
+        .cta {
+          width: 100%;
+          font-size: 13px;
+          padding-bottom: 13px;
+        }
+        .image-frame {
+          height: 280px;
+        }
+        .image-frame img {
+          object-position: 62% 50%;
+        }
+        figcaption {
+          font-size: 8px;
+          padding-top: 11px;
+        }
+        .universities {
+          margin-top: 26px;
+          padding-top: 22px;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 23px 25px;
+        }
+        .universities p {
+          font-size: 10px;
+        }
+        .universities img {
+          height: 30px;
+        }
+        .universities img[alt='University of Pennsylvania'] {
+          height: 27px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <a class="brand" href="/#home" aria-label="Admission Possible home">
+        <img src="/brand/cap-no-star.png" width="40" height="34" alt="" />
+        <span>(Ad)mission<span> Possible</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="/#home" aria-current="page"><span>01/</span>Home</a>
+        <a href="/#about"><span>02/</span>About Us</a>
+        <a href="/#how-it-works"><span>03/</span>How It Works</a>
+        <a href="/#what-we-offer"><span>04/</span>What We Offer</a>
+        <a href="/#join"><span>05/</span>Join Us</a>
+      </nav>
+    </header>
+    <main>
+      <p class="eyebrow">Big dreams. Endless possibilities.</p>
+      <div class="headline">
+        <h1>Impossible becomes <span>possible.</span></h1>
+        <div class="introduction">
+          <p>College feels closer with someone in your corner. Find a peer mentor to help you take the next step.</p>
+          <a class="cta" href="/#join">Find your mentor <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <figure class="panorama">
+        <div class="image-frame">
+          <img
+            src="/campus/campus-20.webp"
+            width="1600"
+            height="669"
+            alt="Sunlit autumn trees framing a green quadrangle at Brown University"
+            fetchpriority="high"
+          />
+        </div>
+        <figcaption>
+          <span class="index">A place to begin.</span><span>Brown University · Providence, RI</span>
+        </figcaption>
+      </figure>
+      <div class="universities" aria-label="University community">
+        <p>Big possibilities.<br />Across every campus.</p>
+        <img src="/logos/brown-provided.png" alt="Brown University" />
+        <img src="/logos/davis.svg" alt="UC Davis" />
+        <img src="/logos/bu.svg" alt="Boston University" />
+        <img src="/logos/berkeley.svg" alt="UC Berkeley" />
+        <img src="/logos/penn-full.png" alt="University of Pennsylvania" />
+      </div>
+    </main>
+    <div class="study-label">Study C / Panorama</div>
+  </body>
+</html>

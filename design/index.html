@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Hero design studies — Admission Possible</title>
+    <style>
+      @font-face {
+        font-family: Beausite;
+        src: url('/fonts/beausite-regular.woff2');
+        font-weight: 400;
+      }
+      @font-face {
+        font-family: Beausite;
+        src: url('/fonts/beausite-medium.woff2');
+        font-weight: 500;
+      }
+      @font-face {
+        font-family: Mono;
+        src: url('/fonts/geist-mono-latin.woff2');
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #fafaf7;
+        color: #171719;
+        font:
+          16px/1.5 Beausite,
+          Arial,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+        text-underline-offset: 4px;
+      }
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+      h1,
+      h2,
+      h3 {
+        font-weight: 500;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+      }
+      button,
+      a {
+        touch-action: manipulation;
+      }
+      :focus-visible {
+        outline: 2px solid #7552a4;
+        outline-offset: 5px;
+      }
+      .shell {
+        max-width: 1680px;
+        margin: auto;
+        padding: 30px 3.5vw 70px;
+      }
+      .masthead {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #d5d5ce;
+        padding-bottom: 23px;
+        font: 11px Mono;
+      }
+      .masthead img {
+        width: 28px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+      .intro {
+        padding: 54px 0 37px;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 40px;
+      }
+      h1 {
+        font-size: clamp(38px, 4.7vw, 75px);
+        line-height: 1.04;
+        letter-spacing: -0.055em;
+        max-width: 720px;
+      }
+      .intro p {
+        max-width: 420px;
+        font-size: 15px;
+        color: #626260;
+      }
+      .intro h1 span {
+        color: #7552a4;
+      }
+      .concepts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 23px;
+      }
+      .concept {
+        min-width: 0;
+      }
+      .preview {
+        display: block;
+        border: 1px solid #d5d5ce;
+        overflow: hidden;
+        background: white;
+        transition: border-color 0.2s;
+      }
+      .preview:hover {
+        border-color: #7552a4;
+      }
+      .preview img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .concept h2 {
+        font-size: 25px;
+        letter-spacing: -0.035em;
+        margin: 18px 0 6px;
+        display: flex;
+        align-items: baseline;
+        gap: 12px;
+      }
+      .concept h2 small {
+        font: 11px Mono;
+        color: #7552a4;
+      }
+      .concept p {
+        font-size: 14px;
+        line-height: 1.5;
+        color: #626260;
+        max-width: 390px;
+        min-height: 65px;
+      }
+      .concept > a:last-child {
+        display: inline-block;
+        font-size: 13px;
+        margin-top: 13px;
+      }
+      .review {
+        margin-top: 45px;
+        padding: 24px 0;
+        border-top: 1px solid #171719;
+        border-bottom: 1px solid #d5d5ce;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+      }
+      .review p {
+        font-size: 14px;
+        color: #626260;
+        max-width: 650px;
+      }
+      .review strong {
+        display: block;
+        font-weight: 500;
+        color: #171719;
+        font-size: 21px;
+        margin-bottom: 5px;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        background: #171719;
+        color: white;
+        text-decoration: none;
+        padding: 16px 22px;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+      .reference-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 24px;
+        margin: 55px 0 25px;
+      }
+      .reference-heading h2 {
+        font-size: 36px;
+        letter-spacing: -0.045em;
+      }
+      .reference-heading p {
+        max-width: 420px;
+        font-size: 14px;
+        color: #626260;
+      }
+      .references {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 35px;
+      }
+      .reference {
+        padding: 22px 0;
+        border-top: 1px solid #d5d5ce;
+      }
+      .reference a {
+        font-size: 20px;
+        text-decoration: none;
+        display: flex;
+        justify-content: space-between;
+      }
+      .reference a:hover {
+        color: #7552a4;
+      }
+      .reference p {
+        font-size: 13px;
+        line-height: 1.6;
+        color: #626260;
+        max-width: 365px;
+        margin-top: 10px;
+      }
+      .note {
+        margin-top: 32px;
+        font-size: 12px;
+        color: #626260;
+        max-width: 900px;
+      }
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 50px;
+        border-top: 1px solid #d5d5ce;
+        padding-top: 20px;
+        font: 10px Mono;
+        color: #626260;
+      }
+      @media (max-width: 800px) {
+        .shell {
+          padding: 22px;
+        }
+        .intro {
+          display: block;
+          padding-top: 35px;
+        }
+        .intro p {
+          margin-top: 25px;
+        }
+        .concepts {
+          grid-template-columns: 1fr;
+        }
+        .concept {
+          margin-bottom: 30px;
+        }
+        .concept p {
+          min-height: 0;
+          max-width: 100%;
+        }
+        .review,
+        .reference-heading {
+          align-items: start;
+          flex-direction: column;
+        }
+        .references {
+          grid-template-columns: 1fr 1fr;
+        }
+        .masthead {
+          font-size: 9px;
+          gap: 10px;
+        }
+        .masthead img {
+          width: 22px;
+        }
+        .footer {
+          gap: 20px;
+          line-height: 1.7;
+        }
+      }
+      @media (max-width: 450px) {
+        .references {
+          grid-template-columns: 1fr;
+        }
+        .reference-heading h2 {
+          font-size: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header class="masthead">
+        <span><img src="/brand/cap-no-star.png" alt="" /> (AD)MISSION POSSIBLE</span><span>HERO / DESIGN REVIEW</span>
+      </header>
+      <div class="intro">
+        <h1>Three ways to make<br />it <span>possible.</span></h1>
+        <p>
+          Same identity. Three distinct first impressions. Each study uses Beausite, the original lavender palette, real
+          campus photography, and the five-section navigation.
+        </p>
+      </div>
+      <main>
+        <div class="concepts">
+          <article class="concept">
+            <a class="preview" href="hero-editorial.html" aria-label="Open Study A, Editorial"
+              ><img
+                src="previews/editorial.png"
+                alt="Editorial hero: staggered headline at left, one large campus image at right"
+                width="1440"
+                height="1000"
+            /></a>
+            <h2><small>A /</small> The editorial</h2>
+            <p>
+              Oversized staggered type, one deliberate image, and a clear mentorship action. A balanced, confident first
+              impression.
+            </p>
+            <a href="hero-editorial.html">Explore Study A ↗</a>
+          </article>
+          <article class="concept">
+            <a class="preview" href="hero-poster.html" aria-label="Open Study B, Typographic poster"
+              ><img
+                src="previews/poster.png"
+                alt="Poster hero: huge staggered Impossible Becomes Possible text and a small campus window"
+                width="1440"
+                height="1000"
+            /></a>
+            <h2><small>B /</small> The poster</h2>
+            <p>
+              Typography leads. A small campus window creates an unexpected pause within a bold, memorable composition.
+            </p>
+            <a href="hero-poster.html">Explore Study B ↗</a>
+          </article>
+          <article class="concept">
+            <a class="preview" href="hero-panorama.html" aria-label="Open Study C, Panorama"
+              ><img
+                src="previews/panorama.png"
+                alt="Panorama hero: large left-aligned headline above a wide autumn campus image"
+                width="1440"
+                height="1000"
+            /></a>
+            <h2><small>C /</small> The panorama</h2>
+            <p>A wide photographic frame and generous breathing room. The calmest, most cinematic interpretation.</p>
+            <a href="hero-panorama.html">Explore Study C ↗</a>
+          </article>
+        </div>
+        <div class="review">
+          <p>
+            <strong>Now refining: the editorial.</strong>The working homepage adds a sliding campus gallery, direct
+            access to the mentorship form, motion controls, and a responsive layout. The original opening animation
+            stays.
+          </p>
+          <a class="button" href="/#home">Open the working website <span>↗</span></a>
+        </div>
+        <div class="reference-heading">
+          <h2>What informed the studies.</h2>
+          <p>
+            Selected after browsing Awwwards and the live sites. These are composition references; Admission Possible
+            keeps its own typography, imagery, and identity.
+          </p>
+        </div>
+        <div class="references">
+          <article class="reference">
+            <a href="https://www.kurzform.studio/" target="_blank" rel="noreferrer">Kurzform <span>↗</span></a>
+            <p>
+              Compact copy, a tall image, and generous negative space. A useful guide for the editorial study’s balance.
+            </p>
+          </article>
+          <article class="reference">
+            <a href="https://parkstudio.co/" target="_blank" rel="noreferrer">Park <span>↗</span></a>
+            <p>
+              Confident oversized typography integrated with imagery. A reference for scale and deliberate alignment.
+            </p>
+          </article>
+          <article class="reference">
+            <a href="https://www.instrument.com/" target="_blank" rel="noreferrer">Instrument <span>↗</span></a>
+            <p>
+              A huge typographic statement followed by one large media frame. Very few elements carry the whole first
+              impression.
+            </p>
+          </article>
+          <article class="reference">
+            <a href="https://www.aspensearch.com/" target="_blank" rel="noreferrer">Aspen Search <span>↗</span></a>
+            <p>A disciplined split grid and clear separation of message, image, and supporting content.</p>
+          </article>
+          <article class="reference">
+            <a href="https://studiofreight.com/" target="_blank" rel="noreferrer">Studio Freight <span>↗</span></a>
+            <p>
+              Generous central space framed by selected image tiles. Demonstrates how imagery can leave the message room
+              to breathe.
+            </p>
+          </article>
+          <article class="reference">
+            <a href="https://studiodad.biz/" target="_blank" rel="noreferrer">Studio DAD <span>↗</span></a>
+            <p>One large framed visual with sparse surroundings. A useful reference for photographic restraint.</p>
+          </article>
+          <article class="reference">
+            <a href="https://dvo.it/" target="_blank" rel="noreferrer">DVO <span>↗</span></a>
+            <p>
+              A single human-focused image and a restrained bottom-left headline. Considered for a future student-led
+              photo direction.
+            </p>
+          </article>
+          <article class="reference">
+            <a href="https://bigdreams.group/" target="_blank" rel="noreferrer">Big Dreams Group <span>↗</span></a>
+            <p>
+              A large typographic statement and expansive space. The scale informs the poster, without adopting its
+              particles or text effects.
+            </p>
+          </article>
+          <article class="reference">
+            <a href="https://siena.film/" target="_blank" rel="noreferrer">Siena Film Foundation <span>↗</span></a>
+            <p>Strong single-image art direction and confident type placement. Useful for judging image crops.</p>
+          </article>
+          <article class="reference">
+            <a href="https://art.appstate.edu/" target="_blank" rel="noreferrer">App State Art <span>↗</span></a>
+            <p>
+              Expressive image composition and a large central message. Screened as a more adventurous education
+              example.
+            </p>
+          </article>
+          <article class="reference">
+            <a href="https://www.quakerschool.org/" target="_blank" rel="noreferrer"
+              >The Quaker School <span>↗</span></a
+            >
+            <p>One full-screen classroom scene with a short, emotionally clear headline. The human story leads.</p>
+          </article>
+          <article class="reference">
+            <a href="https://www.risd.edu/" target="_blank" rel="noreferrer">RISD <span>↗</span></a>
+            <p>
+              Oversized left-aligned typography and generous space. Education content can use a strong editorial
+              hierarchy.
+            </p>
+          </article>
+        </div>
+        <p class="note">
+          Also reviewed: Brown University, Grids by Obys, and the previous Funny reference. StudioRS, Elena Gonci,
+          Maison des Élites, and Daybreak were screened out for this direction. This is a curated review of relevant
+          examples, not an exhaustive survey of the Awwwards archive. Studies are local design prototypes; their signup
+          links lead to the working site.
+        </p>
+      </main>
+      <footer class="footer">
+        <span>ADMISSION POSSIBLE / HERO EXPLORATION</span
+        ><a href="https://www.awwwards.com/websites/minimal/" target="_blank" rel="noreferrer"
+          >Explore the Awwwards minimal collection ↗</a
+        >
+      </footer>
+    </div>
+  </body>
+</html>

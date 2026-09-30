@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#fafaf7" />
+    <title>Study B · Typography — Admission Possible</title>
+    <link rel="preload" href="/fonts/beausite-medium.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: Beausite;
+        src: url('/fonts/beausite-regular.woff2') format('woff2');
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: Beausite;
+        src: url('/fonts/beausite-medium.woff2') format('woff2');
+        font-weight: 500;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Geist Mono';
+        src: url('/fonts/geist-mono-latin.woff2') format('woff2');
+        font-weight: 400;
+        font-display: swap;
+      }
+      :root {
+        --paper: #fafaf7;
+        --ink: #171719;
+        --muted: #626260;
+        --line: #d5d5ce;
+        --lavender: #b388eb;
+        --purple: #7552a4;
+        --gutter: clamp(22px, 3vw, 56px);
+        font-family: Beausite, Arial, sans-serif;
+        font-synthesis: none;
+        color: var(--ink);
+        background: var(--paper);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+      h1,
+      p,
+      figure {
+        margin: 0;
+      }
+      ::selection {
+        color: var(--ink);
+        background: var(--lavender);
+      }
+      :focus-visible {
+        outline: 2px solid var(--purple);
+        outline-offset: 5px;
+      }
+      .skip-link {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 20;
+        padding: 14px 18px;
+        color: white;
+        background: var(--ink);
+        transform: translateY(-160%);
+      }
+      .skip-link:focus {
+        transform: none;
+      }
+      .site-header {
+        height: 84px;
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        padding: 0 var(--gutter);
+        border-bottom: 1px solid var(--line);
+      }
+      .header-brand {
+        flex: 0 0 210px;
+      }
+      .wordmark {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        font-size: 15px;
+        letter-spacing: -0.045em;
+        line-height: 1.03;
+        font-weight: 500;
+      }
+      .wordmark img {
+        width: 35px;
+        height: 32px;
+        object-fit: contain;
+      }
+      .wordmark-break {
+        display: block;
+      }
+      .site-header nav {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .site-header nav a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 12px 0;
+        position: relative;
+        font-size: 13px;
+        white-space: nowrap;
+      }
+      .site-header nav a > span {
+        color: var(--muted);
+        font:
+          10px 'Geist Mono',
+          monospace;
+        margin-right: 5px;
+      }
+      .site-header nav a::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 6px;
+        height: 1px;
+        background: var(--ink);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.2s ease;
+      }
+      .site-header nav a:hover::after,
+      .site-header nav a[aria-current]::after {
+        transform: scaleX(1);
+      }
+      .hero {
+        display: flex;
+        flex-direction: column;
+        min-height: calc(100svh - 84px);
+        max-width: 1760px;
+        margin: 0 auto;
+        padding: 0 var(--gutter);
+      }
+      .hero-topline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        padding: 26px 0 24px;
+        font:
+          10px/1.5 'Geist Mono',
+          monospace;
+        letter-spacing: 0.025em;
+        text-transform: uppercase;
+      }
+      .hero-topline p:first-child {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+      }
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--purple);
+      }
+      .hero-topline p:last-child {
+        color: var(--muted);
+      }
+      .poster {
+        position: relative;
+        padding-bottom: 4px;
+      }
+      .poster h1 {
+        font-weight: 500;
+        letter-spacing: -0.073em;
+      }
+      .poster-word {
+        display: block;
+        width: max-content;
+      }
+      .poster-word--first {
+        font-size: min(15.4vw, 266px);
+        line-height: 0.9;
+        margin-left: -0.007em;
+      }
+      .poster-word--middle {
+        font-size: min(7.9vw, 136px);
+        line-height: 0.95;
+        margin-top: 9px;
+        margin-left: 34%;
+        letter-spacing: -0.065em;
+      }
+      .poster-word--last {
+        font-size: min(16.5vw, 285px);
+        line-height: 0.9;
+        margin-top: 10px;
+        margin-left: 24%;
+        color: var(--purple);
+      }
+      .campus-window {
+        position: absolute;
+        left: 4%;
+        top: 42%;
+        width: 19%;
+      }
+      .campus-window .image-window {
+        overflow: hidden;
+        aspect-ratio: 1.54;
+        background: #cfc1d0;
+      }
+      .campus-window img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.02);
+        transition: transform 1.1s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .campus-window:hover img {
+        transform: scale(1.08);
+      }
+      .campus-window figcaption {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 9px;
+        font:
+          8px/1.4 'Geist Mono',
+          monospace;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .caption-index {
+        color: var(--purple);
+      }
+      .hero-support {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        min-height: 142px;
+        margin-top: 14px;
+        padding: 25px 0 28px;
+      }
+      .hero-support-copy {
+        font-size: clamp(17px, 1.45vw, 23px);
+        line-height: 1.42;
+        letter-spacing: -0.028em;
+        max-width: 430px;
+      }
+      .hero-support-copy span {
+        color: var(--muted);
+      }
+      .hero-cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 70px;
+        min-height: 62px;
+        padding: 15px 23px;
+        background: var(--ink);
+        color: var(--paper);
+        font-size: 17px;
+        font-weight: 500;
+        transition:
+          background 0.2s ease,
+          color 0.2s ease;
+      }
+      .hero-cta span {
+        display: inline-block;
+        font-size: 28px;
+        line-height: 1;
+        transition: transform 0.2s ease;
+      }
+      .hero-cta:hover {
+        color: var(--ink);
+        background: var(--lavender);
+      }
+      .hero-cta:hover span {
+        transform: translate(3px, -3px);
+      }
+      .hero-action {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .hero-action > p {
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .university-strip {
+        display: flex;
+        align-items: center;
+        gap: 52px;
+        min-height: 116px;
+        border-top: 1px solid var(--line);
+        margin-top: auto;
+        padding: 26px 0 30px;
+      }
+      .university-strip > p {
+        flex: 0 0 128px;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .university-marks {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        min-width: 0;
+      }
+      .university-marks img {
+        max-width: 16%;
+        width: 155px;
+        height: 48px;
+        object-fit: contain;
+        filter: grayscale(1);
+        mix-blend-mode: multiply;
+        opacity: 0.86;
+      }
+      .university-marks img[src$='davis.svg'],
+      .university-marks img[src$='berkeley.svg'] {
+        filter: brightness(0);
+      }
+      .university-marks img.mark-brown {
+        width: 133px;
+      }
+      .university-marks img.mark-boston {
+        width: 112px;
+      }
+      .university-marks img.mark-mit {
+        width: 74px;
+      }
+      .study-label {
+        position: fixed;
+        right: 15px;
+        bottom: 12px;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 8px 10px;
+        color: var(--muted);
+        background: rgba(250, 250, 247, 0.95);
+        border: 1px solid var(--line);
+        font:
+          9px/1 'Geist Mono',
+          monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.015em;
+      }
+      .study-label::before {
+        content: '';
+        width: 5px;
+        height: 5px;
+        background: var(--lavender);
+      }
+      @media (min-width: 1600px) {
+        .hero-topline {
+          padding-top: 37px;
+        }
+        .hero-support {
+          margin-top: 32px;
+        }
+      }
+      @media (max-width: 1100px) {
+        .site-header {
+          gap: 24px;
+        }
+        .header-brand {
+          flex-basis: 180px;
+        }
+        .site-header nav {
+          gap: 14px;
+        }
+        .site-header nav a {
+          font-size: 11px;
+        }
+        .site-header nav a > span {
+          font-size: 8px;
+        }
+        .hero {
+          min-height: calc(100svh - 84px);
+        }
+        .hero-topline {
+          padding-top: 35px;
+          padding-bottom: 36px;
+          font-size: 9px;
+        }
+        .hero-support {
+          margin-top: 28px;
+        }
+        .university-strip {
+          gap: 25px;
+        }
+        .university-strip > p {
+          flex-basis: 100px;
+          font-size: 11px;
+        }
+        .university-marks {
+          gap: 22px;
+        }
+        .university-marks img {
+          height: 39px;
+        }
+      }
+      @media (max-width: 760px) {
+        .site-header {
+          height: auto;
+          min-height: 106px;
+          display: block;
+          padding-top: 15px;
+          padding-bottom: 4px;
+        }
+        .header-brand {
+          display: block;
+          width: max-content;
+          margin: 0 auto 5px;
+        }
+        .wordmark {
+          font-size: 13px;
+        }
+        .wordmark img {
+          width: 26px;
+          height: 25px;
+        }
+        .wordmark-break {
+          display: inline;
+        }
+        .site-header nav {
+          gap: 12px;
+        }
+        .site-header nav a {
+          font-size: 10px;
+        }
+        .site-header nav a > span {
+          display: none;
+        }
+        .hero {
+          min-height: auto;
+          padding-bottom: 36px;
+        }
+        .hero-topline {
+          order: 0;
+          padding-top: 25px;
+          padding-bottom: 28px;
+          font-size: 8px;
+        }
+        .hero-topline p:last-child {
+          display: none;
+        }
+        .poster {
+          display: contents;
+        }
+        .poster h1 {
+          order: 1;
+        }
+        .poster-word--first {
+          font-size: 13.45vw;
+          line-height: 1;
+        }
+        .poster-word--middle {
+          font-size: 10vw;
+          margin-top: 6px;
+          margin-left: 30%;
+          line-height: 1.08;
+        }
+        .poster-word--last {
+          font-size: 18vw;
+          margin-top: 7px;
+          margin-left: 8%;
+          line-height: 1.02;
+        }
+        .hero-support {
+          order: 2;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 22px;
+          margin-top: 22px;
+          min-height: auto;
+          padding: 0;
+        }
+        .hero-support-copy {
+          font-size: 17px;
+          max-width: 290px;
+          line-height: 1.45;
+        }
+        .hero-action {
+          align-items: flex-start;
+          gap: 9px;
+        }
+        .hero-cta {
+          min-height: 54px;
+          padding: 12px 18px;
+          font-size: 15px;
+          gap: 48px;
+        }
+        .hero-cta span {
+          font-size: 24px;
+        }
+        .hero-action > p {
+          font-size: 10px;
+        }
+        .campus-window {
+          order: 3;
+          position: static;
+          width: 100%;
+          margin: 29px 0 26px;
+        }
+        .campus-window .image-window {
+          aspect-ratio: 2.35;
+        }
+        .campus-window img {
+          object-position: center 62%;
+        }
+        .campus-window figcaption {
+          font-size: 7px;
+          margin-top: 7px;
+        }
+        .university-strip {
+          order: 4;
+          display: block;
+          padding: 17px 0 0;
+          min-height: auto;
+        }
+        .university-strip > p {
+          font-size: 10px;
+          margin-bottom: 18px;
+        }
+        .university-strip > p br {
+          display: none;
+        }
+        .university-marks {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 18px 26px;
+        }
+        .university-marks img {
+          width: 100%;
+          max-width: 100%;
+          height: 34px;
+        }
+        .university-marks img.mark-brown,
+        .university-marks img.mark-boston,
+        .university-marks img.mark-mit {
+          width: 100%;
+        }
+        .university-marks img.mark-mit {
+          height: 29px;
+        }
+        .study-label {
+          font-size: 8px;
+          right: 10px;
+          bottom: 9px;
+          padding: 7px 8px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="header-brand" href="/#home" aria-label="Admission Possible home">
+        <span class="wordmark"
+          ><img src="/brand/cap-no-star.png" alt="" width="905" height="668" /><span
+            >(Ad)mission<span class="wordmark-break"> </span>Possible</span
+          ></span
+        >
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="/#home" aria-current="page"><span>01/</span>Home</a>
+        <a href="/#about"><span>02/</span>About Us</a>
+        <a href="/#how-it-works"><span>03/</span>How It Works</a>
+        <a href="/#what-we-offer"><span>04/</span>What We Offer</a>
+        <a href="/#join"><span>05/</span>Join Us</a>
+      </nav>
+    </header>
+    <main id="main" class="hero">
+      <div class="hero-topline">
+        <p><span class="status-dot" aria-hidden="true"></span>One-to-one college mentorship</p>
+        <p>Your story. Your direction.</p>
+      </div>
+      <div class="poster">
+        <h1>
+          <span class="poster-word poster-word--first">Impossible</span
+          ><span class="poster-word poster-word--middle">Becomes</span
+          ><span class="poster-word poster-word--last">Possible.</span>
+        </h1>
+        <figure class="campus-window">
+          <div class="image-window">
+            <img
+              src="/campus/campus-13.webp"
+              alt="Rice University’s tree-lined campus at sunset"
+              width="1600"
+              height="1080"
+              fetchpriority="high"
+            />
+          </div>
+          <figcaption>
+            <span>Rice University</span><span class="caption-index">A possible next chapter ↗</span>
+          </figcaption>
+        </figure>
+      </div>
+      <div class="hero-support">
+        <p class="hero-support-copy">
+          A mentor in your corner.<br /><span
+            >Personal guidance through your college application, from the first question to the next chapter.</span
+          >
+        </p>
+        <div class="hero-action">
+          <a class="hero-cta" href="/#join">Find my mentor <span aria-hidden="true">↗</span></a>
+          <p>Start where you are. We’ll take it from there.</p>
+        </div>
+      </div>
+      <div class="university-strip" aria-label="University destinations">
+        <p>
+          A world of<br />
+          possibilities.
+        </p>
+        <div class="university-marks">
+          <img class="mark-brown" src="/logos/brown-provided.png" alt="Brown University" width="160" height="64" />
+          <img src="/logos/davis.svg" alt="UC Davis" width="160" height="64" />
+          <img class="mark-boston" src="/logos/bu.svg" alt="Boston University" width="160" height="64" />
+          <img src="/logos/berkeley.svg" alt="UC Berkeley" width="160" height="64" />
+          <img src="/logos/penn-full.png" alt="University of Pennsylvania" width="160" height="64" />
+          <img class="mark-mit" src="/logos/mit.png" alt="MIT" width="160" height="64" />
+        </div>
+      </div>
+    </main>
+    <div class="study-label">Study B / Typography</div>
+  </body>
+</html>

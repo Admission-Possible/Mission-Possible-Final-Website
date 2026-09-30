@@ -14,7 +14,7 @@
   .site-chrome[data-opening='playing'] .home {
     animation: opening-page-in 1s var(--ease-in-out) 3.9s both;
   }
-  .site-chrome[data-opening='playing'] .hero > .campus-flow {
+  .site-chrome[data-opening='playing'] .hero-gallery {
     animation: opening-art-in 1s var(--ease-in-out) 3.9s both;
   }
   .site-chrome[data-opening='playing'] .hero-copy > * {

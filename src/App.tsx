@@ -3,7 +3,7 @@ import { navigation } from './data/site';
 import { Wordmark } from './components/Wordmark';
 import { OpeningIntro } from './components/OpeningIntro';
 import { CampusFlow } from './components/CampusFlow';
-import { UniversityStrip } from './components/UniversityStrip';
+import { Hero } from './components/Hero';
 import { StepRail } from './components/StepRail';
 import { PathwayList } from './components/PathwayList';
 import { MentorshipForm } from './components/MentorshipForm';
@@ -89,30 +89,12 @@ export default function App() {
         </nav>
       </header>
       <main id="main-content" className="home" tabIndex={-1}>
-        <section id="home" className="hero" aria-labelledby="hero-title">
-          <div className="hero-copy">
-            <p className="eyebrow">BIG DREAMS. ENDLESS POSSIBILITIES.</p>
-            <h1 id="hero-title">
-              Impossible Becomes <span>Possible.</span>
-            </h1>
-          </div>
-          <CampusFlow paused={paused || opening} />
-          <div className="hero-bottom">
-            <p>
-              Your future starts here.
-              <br />
-              <span>Let’s find the way, together.</span>
-            </p>
-            <a className="text-cta" href="#join">
-              Find your mentor <span aria-hidden="true">↗</span>
-            </a>
-            <button className="motion-toggle" onClick={() => setPaused(!paused)} aria-pressed={paused}>
-              <span aria-hidden="true">{paused ? '▷' : 'Ⅱ'}</span>
-              {paused ? 'Play motion' : 'Pause motion'}
-            </button>
-          </div>
-          <UniversityStrip paused={paused || opening} />
-        </section>
+        <Hero
+          paused={paused}
+          opening={opening}
+          onToggleMotion={() => setPaused((value) => !value)}
+          onJoin={() => setFormOpen(true)}
+        />
 
         <section id="about" className="section about" aria-labelledby="about-title">
           <SectionLabel number="02">ABOUT US</SectionLabel>

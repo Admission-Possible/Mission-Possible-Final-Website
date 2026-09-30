@@ -69,26 +69,6 @@
 .header nav a[aria-current]::after {
   transform: scaleX(1);
 }
-.hero {
-  overflow: hidden;
-}
-.hero-copy {
-  text-align: center;
-  padding: 64px var(--gutter) 12px;
-}
-.hero-copy > .eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.13em;
-  margin-bottom: 25px;
-}
-.hero h1 {
-  font-size: clamp(56px, 6.75vw, 116px);
-  line-height: 1.02;
-  letter-spacing: -0.065em;
-}
-.hero h1 > span {
-  color: var(--purple);
-}
 .campus-flow {
   position: relative;
   width: 100%;
@@ -104,37 +84,6 @@
   will-change: transform;
   max-width: none;
   backface-visibility: hidden;
-}
-.hero-bottom {
-  position: relative;
-  margin: 10px var(--gutter) 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.hero-bottom > p {
-  font-size: 14px;
-  line-height: 1.5;
-}
-.hero-bottom > p > span {
-  color: var(--muted);
-}
-.hero-bottom > .text-cta {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.motion-toggle {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  font-family: var(--mono);
-  font-size: 9px;
-  min-height: 40px;
-  text-transform: uppercase;
-}
-.motion-toggle > span {
-  font-size: 17px;
 }
 .university-strip {
   border-top: 1px solid var(--line);
@@ -706,13 +655,6 @@ dialog::backdrop {
   margin-top: 12px;
 }
 @media (min-width: 1800px) {
-  .hero-copy {
-    padding-top: 80px;
-  }
-  .hero-bottom {
-    margin-top: 30px;
-    margin-bottom: 65px;
-  }
   .about-grid {
     padding: 70px 0;
   }
@@ -737,12 +679,6 @@ dialog::backdrop {
   }
   .header nav a > span {
     font-size: 8px;
-  }
-  .hero-copy {
-    padding-top: 48px;
-  }
-  .hero h1 {
-    font-size: 6.8vw;
   }
   .about-grid {
     gap: 6vw;
@@ -808,48 +744,8 @@ dialog::backdrop {
   .header nav a::after {
     bottom: 3px;
   }
-  .hero-copy {
-    padding-top: 40px;
-  }
-  .hero-copy > .eyebrow {
-    font-size: 8px;
-    letter-spacing: 0.08em;
-    margin-bottom: 20px;
-  }
-  .hero h1 {
-    font-size: clamp(42px, 10.5vw, 78px);
-    letter-spacing: -0.065em;
-    line-height: 1.03;
-  }
-  .hero h1 > span {
-    display: block;
-  }
   .campus-flow {
     height: 230px;
-  }
-  .hero-bottom {
-    flex-wrap: wrap;
-    gap: 22px;
-    margin-top: 10px;
-    margin-bottom: 26px;
-    align-items: center;
-  }
-  .hero-bottom > p {
-    font-size: 11px;
-  }
-  .hero-bottom > .text-cta {
-    position: static;
-    transform: none;
-    font-size: 12px;
-    gap: 15px;
-  }
-  .motion-toggle {
-    position: absolute;
-    right: 0;
-    top: -45px;
-    font-size: 8px;
-    opacity: 0.8;
-    min-height: 32px;
   }
   .university-strip {
     padding-top: 21px;

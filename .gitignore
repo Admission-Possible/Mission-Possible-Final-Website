@@ -35,3 +35,7 @@ pnpm-debug.log*
 
 # TypeScript incremental build info
 *.tsbuildinfo
+
+# Source audit checkouts and local verification
+.sources/
+.review/

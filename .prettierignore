@@ -4,3 +4,8 @@ package-lock.json
 *.png
 # The design-system stylesheet is intentionally hand-formatted (compact rules).
 src/styles/global.css
+
+.sources
+.review
+assets
+public

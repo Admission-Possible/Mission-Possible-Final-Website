@@ -2,7 +2,7 @@
 
 A unified, five-section website for Admission Possible: **Home, About Us, How It Works, What We Offer, Join Us**. Built from the two existing organization repositories, with both Git histories retained.
 
-The site preserves the original Beausite typography, black-and-lavender opening animation, moving campus panorama, university marks, and five-step process. It adds Funny-inspired numbered navigation and square pathway previews, full-color photography from genuine 4K originals, a cap logo without the star, and a complete student mentorship intake.
+The site preserves the original Beausite typography, black-and-lavender opening animation, university marks, and five-step process. The redesigned editorial hero pairs a staggered headline with one sliding campus frame and direct access to the mentorship form. The original flowing campus composition remains in Join Us. Numbered navigation, square pathway previews, full-color photography from genuine 4K originals, and the cap logo without its star complete the design.
 
 ## Run locally
 
@@ -25,6 +25,12 @@ npm run preview -- --host 127.0.0.1 --port 4173
 ```
 
 The build prerenders the complete landing page, so its content is readable before JavaScript loads. Join Us opens an accessible native dialog containing a four-step form; it does not add another primary page or navigation section. Privacy and photography credits are available from the footer.
+
+## Hero design review
+
+With the development server running, open **http://127.0.0.1:5173/design/index.html** to compare three standalone hero studies and the selected reference websites. The editorial, typographic poster, and panorama studies use the actual brand fonts and existing photography. This review is a development artifact; it is not included in the production build or primary navigation. The working homepage implements the refined editorial version.
+
+See [the research and iteration record](docs/HERO-DESIGN.md) for the visual decisions and validation.
 
 ## Student applications
 
@@ -57,7 +63,7 @@ Before opening public intake, connect and verify the receiving inbox and sender,
 
 Process photos are alternate licensed originals for Harvard, Brown, Columbia, MIT, and Penn State. The Harvard source also matches an original hero photograph. They are not upscaled small images. Attribution and derivative-license notices are published at `/image-credits.html`.
 
-The original opening sequence lasts about five seconds and can be skipped. Escape, Tab, hash navigation, and reduced-motion preference bypass it. Campus motion pauses without jumping and stops rendering offscreen, when hidden, and with reduced motion. The university strip pauses on hover/focus. Pathway previews work with hover/focus, Escape dismisses them, and touch layouts show inline marks. The process rail supports buttons, keyboard scrolling, and swiping.
+The original opening sequence lasts about five seconds and can be skipped. Escape, Tab, hash navigation, and reduced-motion preference bypass it. The hero advances every eight seconds through five responsive campus images. Its native horizontal gallery supports swiping and previous/next buttons, retains the selected image across resizing, and pauses automatically during hover/focus, offscreen, while the document is hidden, and with reduced motion. The last image resets instantly to the first to avoid a long reverse sweep. The global motion control also pauses the university strip and Join Us campus flow. Pathway previews work with hover/focus, Escape dismisses them, and touch layouts show inline marks. The process rail supports buttons, keyboard scrolling, and swiping.
 
 ## Source history and design
 

@@ -30,3 +30,16 @@ Verified locally on September 29, 2026 (America/New_York).
 ## Not claimed
 
 No real student information or email was sent during verification. Production email delivery still requires the organization's receiving inbox, a Resend API key, and a verified sender. A hosting deployment and custom domain are separate from repository publication.
+
+## Editorial hero iteration
+
+- Three responsive visual studies and a reference comparison page are available under `/design/index.html` during development. They are excluded from the production build.
+- TypeScript, ESLint, formatting, all 42 existing form/API tests, and client/SSR/prerender builds passed after the hero integration.
+- Production browser: five main sections, no page/hydration errors, and the full hero plus university strip fits at 1440×900.
+- Mobile inspected at 390×844 and 320px width. Headline and controls fit without clipping or horizontal overflow; message and signup action precede the photograph.
+- Primary hero action opens the native mentorship dialog. Escape closes it, restores trigger focus, and restores body scrolling.
+- Two rapid Next clicks reach image three. Resizing from 1280px to 375px preserves image three.
+- A focused gallery button continues to pause autoplay after pointer leave. Reduced motion suppresses autoplay and makes manual navigation instant.
+- Gallery autoplay also stops when the document is hidden or less than 25% of the frame is visible; previous/next wrap instantly at the boundary.
+- Original opening animation completes and restores scrolling; initial photo variants load correctly. The Join Us campus flow and university logos remain.
+- Final JavaScript bundle: 72.82 KB gzip. No new runtime dependencies were added.

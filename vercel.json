@@ -47,16 +47,7 @@
       ]
     },
     {
-      "source": "/(colleges|team|brand|art)/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=604800"
-        }
-      ]
-    },
-    {
-      "source": "/(logo.webp|og-card.png|apple-touch-icon.png|favicon-32.png|favicon.ico)",
+      "source": "/(campus|logos|brand)/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -64,5 +55,8 @@
         }
       ]
     }
-  ]
+  ],
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
 }

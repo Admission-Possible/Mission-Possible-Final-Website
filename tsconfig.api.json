@@ -5,8 +5,10 @@
        Node.js runtime exposes; this code never touches the browser DOM. */
     "lib": ["ES2023", "DOM"],
     "module": "ESNext",
+    "types": ["node"],
     "skipLibCheck": true,
     "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,

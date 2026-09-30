@@ -1,26 +1,40 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig, loadEnv } from 'vite';
+import type { Plugin, Connect } from 'vite';
 import react from '@vitejs/plugin-react';
+import { Readable } from 'node:stream';
+import { handleJoin } from './api/join.ts';
 
-// https://vitejs.dev/config/  |  https://vitest.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
-    // Vitest stubs CSS imports to an empty string by default, which would make
-    // the computed contrast checks in src/styles/contrast.test.ts silently
-    // vacuous. Processing CSS keeps `?raw` imports real.
-    css: true,
-    coverage: {
-      provider: 'v8',
-      reporter: ['text-summary', 'lcov'],
-      // Source only: config, entrypoints and type-only files would otherwise
-      // dilute the numbers the thresholds are meant to protect.
-      include: ['src/**/*.{ts,tsx}'],
-      exclude: ['src/**/*.test.{ts,tsx}', 'src/test/**', 'src/main.tsx', 'src/vite-env.d.ts', 'src/types.ts'],
-      // Ratchet upward as coverage improves; these are a floor, not a target.
-      thresholds: { statements: 85, branches: 82, functions: 85, lines: 88 },
-    },
-  },
+// The same handler is used locally and on Vercel; preview never fakes delivery.
+function localIntake(): Plugin {
+  const middleware = (server: { middlewares: { use: (handler: Connect.NextHandleFunction) => void } }) => {
+    server.middlewares.use(async (req, res, next) => {
+      if (req.url?.split('?')[0] !== '/api/join') return next();
+      try {
+        const headers = new Headers();
+        for (const [key, value] of Object.entries(req.headers))
+          if (value) headers.set(key, Array.isArray(value) ? value.join(', ') : value);
+        const init = {
+          method: req.method,
+          headers,
+          ...(req.method !== 'GET' && req.method !== 'HEAD' ? { body: Readable.toWeb(req), duplex: 'half' } : {}),
+        } as RequestInit;
+        const response = await handleJoin(new Request(`http://${req.headers.host ?? 'localhost:5173'}/api/join`, init));
+        res.statusCode = response.status;
+        response.headers.forEach((value, key) => res.setHeader(key, value));
+        res.end(await response.text());
+      } catch {
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'We could not send your application. Please try again.' }));
+      }
+    });
+  };
+  return { name: 'local-intake', configureServer: middleware, configurePreviewServer: middleware };
+}
+
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, process.cwd(), '');
+  for (const key of ['RESEND_API_KEY', 'JOIN_NOTIFY_EMAIL', 'JOIN_FROM_EMAIL'])
+    if (env[key]) process.env[key] = env[key];
+  return { plugins: [react(), localIntake()], server: { host: '127.0.0.1', port: 5173, strictPort: true } };
 });

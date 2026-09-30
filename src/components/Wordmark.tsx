@@ -1,16 +1,10 @@
-interface WordmarkProps {
-  white?: boolean;
-}
-
-export function Wordmark({ white }: WordmarkProps) {
+export function Wordmark({ white = false, large = false }: { white?: boolean; large?: boolean }) {
   return (
-    <div className={'wordmark' + (white ? ' wordmark--white' : '')} role="img" aria-label="Admission Possible">
-      <img className="wordmark__cap" src="/brand/admission-cap.png" alt="" width="905" height="668" />
-      <span className="wordmark__name" aria-hidden="true">
-        Admission
-        <br />
-        Possible
+    <span className={`wordmark${white ? ' wordmark--white' : ''}${large ? ' wordmark--large' : ''}`}>
+      <img src="/brand/cap-no-star.png" alt="" width="905" height="668" />
+      <span>
+        (Ad)mission<span className="wordmark__break"> </span>Possible
       </span>
-    </div>
+    </span>
   );
 }

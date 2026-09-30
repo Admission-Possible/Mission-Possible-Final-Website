@@ -14,18 +14,21 @@
   .site-chrome[data-opening='playing'] .home {
     animation: opening-page-in 1s var(--ease-in-out) 3.9s both;
   }
-  .site-chrome[data-opening='playing'] .home-hero__art {
+  .site-chrome[data-opening='playing'] .hero > .campus-flow {
     animation: opening-art-in 1s var(--ease-in-out) 3.9s both;
   }
-  .site-chrome[data-opening='playing'] .home-hero__copy > * {
+  .site-chrome[data-opening='playing'] .hero-copy > * {
     animation: opening-copy-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
     animation-delay: calc(4.3s + var(--i, 0) * 90ms);
+  }
+  .site-chrome[data-opening='playing'] .hero-copy > h1 {
+    --i: 1;
   }
   .site-chrome[data-opening='playing'] .header {
     overflow: hidden;
     background: transparent;
   }
-  .site-chrome[data-opening='playing'] .header__bar {
+  .site-chrome[data-opening='playing'] .header nav {
     animation: opening-header-in 0.7s var(--ease-in-out) 4.3s both;
   }
   .site-chrome[data-opening='playing'] .header .wordmark {

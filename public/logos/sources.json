@@ -1,0 +1,74 @@
+{
+  "questbridge": {
+    "file": "assets/logos/questbridge.svg",
+    "source": "https://www.questbridge.org/"
+  },
+  "applytexas": {
+    "file": "assets/logos/applytexas.jpg",
+    "source": "https://docs.gato.txst.edu/792575/w/2000/IGqos97C8YZ_/applytexas-logo.jpg"
+  },
+  "penn": {
+    "file": "assets/logos/penn-full.png",
+    "source": "https://branding.web-resources.upenn.edu/sites/default/files/2022-03/UniversityofPennsylvania_FullLogo_RGB-4_0.png"
+  },
+  "tufts": {
+    "file": "assets/logos/tufts.svg",
+    "source": "https://www.tufts.edu/themes/custom/tuftsedu_theme/logo.svg"
+  },
+  "miami": {
+    "file": "assets/logos/miami.png",
+    "source": "https://cdn.miami.edu/_assets-common/images/system/um-print-logo.png"
+  },
+  "florida": {
+    "file": "assets/logos/florida.png",
+    "source": "https://www.ufl.edu/wp-content/uploads/sites/5/2023/09/UF-logo.png"
+  },
+  "commonapp": {
+    "file": "assets/logos/commonapp-dark.svg",
+    "source": "https://www.commonapp.org/static/common-app-logo-black-new-0bb016a61c1dc3b8e95467420eb3abe0.svg"
+  },
+  "coalition": {
+    "file": "assets/logos/coalition.png",
+    "source": "https://images.squarespace-cdn.com/content/v1/5e8633448855d939c82a593b/1610633452258-XYOXN4IH57RS6QY8E0FM/2021Coalition-1500.png?format=1500w"
+  },
+  "cbca": {
+    "file": "assets/logos/cbca.png",
+    "source": "https://commonblackcollegeapp.com/wp-content/uploads/2018/07/edu_logo_transparent_2x-e1533812590742.png"
+  },
+  "davis": {
+    "file": "assets/logos/davis.svg",
+    "source": "https://www.ucdavis.edu/sites/default/files/uc-davis-extended-logo.svg"
+  },
+  "brown": {
+    "file": "assets/logos/brown-provided.png",
+    "source": "user-provided Brown-University-Logo.png"
+  },
+  "bu": {
+    "file": "assets/logos/bu.svg",
+    "source": "https://asset.questbridge.org/content/uploads/partners/boston-university/BU_Logo_V2.svg.svg"
+  },
+  "mit": {
+    "file": "assets/logos/mit.png",
+    "source": "https://asset.questbridge.org/content/uploads/partners/massachusetts-institute-of-technology/mit_lockup_std-three-line_rgb_black.png"
+  },
+  "hamilton": {
+    "file": "assets/logos/hamilton.svg",
+    "source": "https://asset.questbridge.org/content/uploads/partners/hamilton-college/Hamilton_Logo.svg"
+  },
+  "williams": {
+    "file": "assets/logos/williams.png",
+    "source": "https://asset.questbridge.org/content/uploads/partners/williams-college/Williams-Logo-Website.png"
+  },
+  "pomona": {
+    "file": "assets/logos/pomona.svg",
+    "source": "https://asset.questbridge.org/content/uploads/partners/pomona-college/Pomona_Logo_2Line_4C.svg"
+  },
+  "uc": {
+    "file": "assets/logos/uc.svg",
+    "source": "https://admission.universityofcalifornia.edu/"
+  },
+  "berkeley": {
+    "file": "assets/logos/berkeley.svg",
+    "source": "https://brand.berkeley.edu/wp-content/themes/gallantry/dist/imgs/logo-uc-berkeley.svg"
+  }
+}
